@@ -22,14 +22,13 @@ $('body').flowtype({
 */
 var confirmCreation      = document.getElementById('confirm');
 var hammer    = new Hammer.Manager(confirmCreation);
-var swipe     = new Hammer.Swipe();
+var pan     = new Hammer.Pan();
 
-hammer.add(swipe);
+hammer.add(pan);
 
-hammer.on('swipeleft', function(){
-   $(confirmCreation).animate({left: "-=100"}, 100)  
-});
-
-hammer.on('swiperight', function(){
-   $(confirmCreation).animate({left: "+=100"}, 100)  
+hammer.on('pan', function(e){
+   $(confirmCreation).css('transform', 'translateX('+ e.deltaX +'px)');
+  
+    console.log(e.deltaX );
+   
 });
