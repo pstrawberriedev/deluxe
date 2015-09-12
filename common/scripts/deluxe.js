@@ -19,7 +19,7 @@ $('body').flowtype({
 
 /*
   home.js [merge??]
-*/
+
 var confirmCreation      = document.getElementById('confirm');
 var hammer    = new Hammer.Manager(confirmCreation);
 var pan     = new Hammer.Pan();
@@ -32,3 +32,4 @@ hammer.on('pan', function(e){
     console.log(e.deltaX );
    
 });
+*/
