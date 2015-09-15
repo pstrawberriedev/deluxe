@@ -9,11 +9,20 @@ var express = require('express');
 var hbs = require('hbs');
 var hbsutils = require('hbs-utils')(hbs);
 var lessMiddleware = require('less-middleware');
+var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
 
+// Connect DB
+//~~~~~~~~~~~~~~~~~~~~~~~
+mongoose.connect('mongodb://localhost/deluxe1');
+
+// Models
+//~~~~~~~~~~~~~~~~~~~~~~~
+var Place = require('./models/place');
 
 // Hi Express!
 //~~~~~~~~~~~~~~~~~~~~~~~
-var app = express();
+var app = express();  
 
 
 // Register partials
@@ -29,46 +38,29 @@ hbsutils.registerWatchedPartials(__dirname + '/views/content');
 
 // Set up views
 //~~~~~~~~~~~~~~~~~~~~~~~
+// View Engine
 app.set('view engine', 'html');
 app.engine('html', require('hbs').__express);
 app.set('views', __dirname + '/views');
+// LESS
 app.use(lessMiddleware(__dirname + '/common'));
+// Static Dir
 app.use(express.static(__dirname + '/common'));
+// Body Parser
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 
 // Ghetto routes
 //~~~~~~~~~~~~~~~~~~~~~~~
-
-var siteTitle = 'Deluxe';
+var router = express.Router();
 
 // Home, /
 app.get('/', function(req, res) {
 	res.locals = {
-		title: siteTitle,
+		title: 'Deluxe',
         page: {
           subtitle:'Welcome'
-        }
-	}
-    res.render('master');
-});
-
-// New user, /new
-app.get('/new', function(req, res) {
-	res.locals = {
-		title: siteTitle,
-        page: {
-          subtitle:'We\'re Curious...'
-        }
-	}
-    res.render('master');
-});
-
-// New user first, /new
-app.get('/new', function(req, res) {
-	res.locals = {
-		title: siteTitle,
-        page: {
-          subtitle:'We\'re Curious...'
         }
 	}
     res.render('master');
