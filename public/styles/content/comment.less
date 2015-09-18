@@ -10,9 +10,10 @@
     padding:0.1em 0 0 0;
     span {color:#e35db6;}
   }
-  input[type=text] {
+  textarea {
     margin-bottom:1em;
     width:100%;
+    min-height:200px;
     padding:.5em;
     font-size:1.5em;
     outline:0;
@@ -35,5 +36,17 @@
     font-family:'Roboto', sans-serif;
     font-weight:100;
     cursor:pointer;
+  }
+  .results {
+    text-align:center;
+    .items {
+      text-align:left;
+    }
+    span {
+      width:100%;
+      border:1px dotted #ccc;
+      display:block;
+      padding:6px;
+    }
   }
 }
