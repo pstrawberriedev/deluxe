@@ -9,14 +9,19 @@ router.get('/', function(req, res) {
     console.log(comments)
     res.render(
       'form',
-      {title : 'My funky form', comments : comments}
+      {title : 'Comment Form', comments : comments}
     );
   });
 });
 
 /* POST form. */
 router.post('/', function(req, res) {
-  new Comment({title : req.body.comment})
+  new Comment(
+    {
+      title : req.body.comment,
+      name : req.body.name
+    }
+  )
   .save(function(err, comment) {
     console.log(comment)
     res.redirect('form');

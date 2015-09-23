@@ -3,6 +3,7 @@ var Schema   = mongoose.Schema;
 
 var Comment = new Schema({
     title : String,
+    name : String
 });
 
 mongoose.model('comments', Comment);
