@@ -12,6 +12,7 @@
     "express": "~4.13.1",
     "hbs": "^3.1.1",
     "hbs-utils": "0.0.3",
+    "irelia": "^0.2.5",
     "less-middleware": "^2.0.1",
     "mongoose": "^4.1.7",
     "morgan": "~1.6.1",

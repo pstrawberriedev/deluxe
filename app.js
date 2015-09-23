@@ -24,6 +24,7 @@ var lessMiddleware = require('less-middleware');
 //~~~~~~~~~~~~~~~~~~~~~~~
 var routes = require('./routes/index');
 var form = require('./routes/form');
+var lol = require('./routes/lol');
 
 // Call Express
 //~~~~~~~~~~~~~~~~~~~~~~~
@@ -63,6 +64,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/form', form);
 app.use('/create', form);
+app.use('/lol', lol);
 
 
 // Global title?
