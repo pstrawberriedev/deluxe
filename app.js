@@ -63,7 +63,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 //~~~~~~~~~~~~~~~~~~~~~~~
 app.use('/', routes);
 app.use('/form', form);
-app.use('/create', form);
 app.use('/lol', lol);
 
 
@@ -74,7 +73,7 @@ var globalTitle = 'DB Test'
 // If no routes
 //~~~~~~~~~~~~~~~~~~~~~~~
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  var err = new Error('Not Found wtfff');
   err.status = 404;
   next(err);
 });
