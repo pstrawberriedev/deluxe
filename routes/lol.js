@@ -68,7 +68,7 @@ router.post('/', function(req, res, next) {
       summoner = response.data;
       summoner.region = summonerRegion;
 
-      var stuff = ['summary', 'ranked'];
+      var stuff = ['summary', 'ranked', 'league'];
       var finished = 0;
 
       stuff.forEach(function(func){
@@ -87,11 +87,24 @@ router.post('/', function(req, res, next) {
 
           if(finished === stuff.length)
           {
-            console.log(summoner);
+            //console.log(summoner);
+            var crawlMe = summoner.league[0]['entries'][0];
+            var rankedId = summoner.league[0].participantId;
+            
+            summoner.league[0]['entries'].forEach(function(entry) {
+              console.log(entry);
+            });
+
+            
             // Render All the info into a view!
             event.emit('render', req, res, {
               summoner : summoner,
-              profileIcon : 'images/lolstatic/5.18.1/img/profileicon/' + summoner.profileIconId + '.png'
+              profileIcon : 'images/lolstatic/5.18.1/img/profileicon/' + summoner.profileIconId + '.png',
+              leagueName : summoner.league[0].name,
+              //leagueTier : summoner.league[0].tier,
+              //leagueDivision : summoner.league[0]['entries'][0].division,
+              test : JSON.stringify(summoner.league),
+              myId : rankedId
             });
           }
         });

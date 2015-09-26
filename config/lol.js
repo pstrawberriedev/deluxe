@@ -9,39 +9,60 @@ var irelia = new Irelia({
     debug: true
 });
 
-
+// Grab Basic Summoner Info
 function getSummoner(summonerRegion, summonerName, callback)
 {
-  // Grab Basic Summoner Info, pass it into var summoner
   irelia.getSummonerByName(summonerRegion, summonerName, function (err, summoner){
     if(err){
         callback({status: 'error', data: err});
       } else {
-        // Make summoner object top-level
+        // Play catch
         callback({status: 'success', data: summoner[summonerName]});
       }
   });
 }
 
+// Grab Summoner League Info
+function getSummonerLeague(summoner, callback)
+{
+  // Summary info
+  irelia.getLeagueBySummonerId(summoner.region, summoner.id, function (err, summonerLeague) {
+    if(err) {
+      // Play catch
+      callback({status: 'error', data: err});
+      console.log(err);
+    } else {
+      // Play catch
+      callback({status: 'success', data: summonerLeague[summoner.id]});
+    }
+  });
+}
+
+// Grab Summoner Summary
 function getSummary(summoner, callback)
 {
   // Summary info
   irelia.getSummaryStatsBySummonerId(summoner.region, summoner.id, function (err, summonerSummary) {
     if(err) {
+      // Play catch
       callback({status: 'error', data: err});
     } else {
+      // Play catch
       callback({status: 'success', data: summonerSummary.playerStatSummaries});
     }
   });
 }
 
+// Grab Summoner Ranked Info
 function getRanked(summoner, callback)
 {
   // Ranked info
   irelia.getRankedStatsBySummonerId(summoner.region, summoner.id, function (err, summonerRankedInfo) {
     if(err) {
+      // Play catch
       callback({status: 'error', data: err});
     } else {
+      // Play catch
       callback({status: 'success', data: summonerRankedInfo});
     }
   });
@@ -50,5 +71,6 @@ function getRanked(summoner, callback)
 module.exports = {
   summoner: getSummoner,
   summary: getSummary,
-  ranked: getRanked
+  ranked: getRanked,
+  league: getSummonerLeague
 };
