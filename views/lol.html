@@ -22,10 +22,16 @@
     <br /><br />
     
     {{#if summoner}}
-      <section class="row results"> 
-        <h4>{{summoner.name}}</h4><br />
-        <div class="col-sm-12 items">
-          <span>ID: <br />{{summoner.id}}</span>
+      <section class="row results">
+        <div class="col-sm-6">
+          <img class="profileIcon" src ="{{profileIcon}}" />
+          <ul class="basic">
+            <li class="name">{{summoner.name}}&nbsp;&nbsp;<img class="rankedIcon" src="{{rankedIcon}}" /></li>
+            <li class="level">Level {{summoner.summonerLevel}}</li>
+          </ul>
+        </div>
+        <div class="col-sm-6">
+          <img src ="" />
         </div>
       </section>
     {{/if}}

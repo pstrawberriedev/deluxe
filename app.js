@@ -68,7 +68,7 @@ app.use('/lol', lol);
 
 // Global title?
 //~~~~~~~~~~~~~~~~~~~~~~~
-var globalTitle = 'DB Test'
+var globalTitle = 'Deluxe'
 
 // If no routes
 //~~~~~~~~~~~~~~~~~~~~~~~

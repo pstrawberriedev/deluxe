@@ -6,10 +6,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   console.log('--> Home ');
   res.locals = {
-    title: 'Home',
-    moar: {
-      infoz:'kewl'
-    }
+    title: 'Home'
   }
   res.render('home');
 });

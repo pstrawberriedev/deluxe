@@ -1,13 +1,22 @@
+// The good stuff
 var express = require('express');
 var router = express.Router();
+var get = require('../config/lol');
+var events = require('events');
+var event = new events.EventEmitter();
+var extend = require('extend');
 
-var Irelia = require('irelia');
-var irelia = new Irelia({
-    secure: true,
-    host: 'na.api.pvp.net',
-    path: '/api/lol/',
-    key: 'a1051ea8-4b73-49ee-89d4-e4863a00b92e',
-    debug: true
+event.on('render', function(req, res, options)
+{
+    var defaults =
+    {
+      view: 'lol',
+      title: 'Irelia'
+    };
+
+    // Deep combine our defaults with the requested options
+    options = extend(true, defaults, options);
+    res.render(options.view, options);
 });
 
 /* GET */
@@ -16,55 +25,79 @@ router.get('/', function(req, res) {
       res.render(
         'lol',
         {
-          title : 'Irelia'
+          title : 'Summoner Lookup'
         }
       );
-    
 });
 
 /* POST */
 
 router.post('/', function(req, res, next) {
+   
+  // Base Globals
   var summonerRegion = req.body.region;
-  var summonerName = req.body.summoner;
+  var summonerName = req.body.summoner.replace(/\s+/g, ''); //remove whitespace
   var summoner = {};
   
-  irelia.getSummonerByName(summonerRegion, summonerName, function (err, summoner){
-    if(err){
-          if(err.status){
-              if(err.status.code == 429){
-                  console.log(err.status.message);
-              } else if(err.status.code == 404){
-                  console.log(err.status.message);
-                  res.render(
-                    'lol',
-                    {
-                      title : 'Irelia',
-                      error : 'Summoner ' + err.status.message
-                    }
-                  );
-              } else if(err.status.code == 500){
-                  console.log(err.status.message);
-              } else {
-                  console.log('Unknown error code');
-              }
-          } else {
-              console.log(err); // Non http error
-              next();
-          }
+  get.summoner(summonerRegion, summonerName, function(response) {
+    if(response.status == 'error')
+    {
+	  var status = response.data.status;
+	
+      if(response.data && status){
+        if(status.code == 429){
+            console.log(status.message);
+        } else if(status.code == 404){
+            console.log(status.message);
+            event.emit('render', req, res, {error: 'Summoner ' + status.message});
+        } else if(status.code == 500){
+            console.log(status.message);
+          event.emit('render', req, res, {error: 'Summoner ' + status.message});
+        } else {
+          console.log('Unknown error code');
+          event.emit('render', req, res, {error: 'Unknown error code'});
+        }
       } else {
-        summoner = summoner[summonerName];
-        res.render(
-          'lol',
-          {
-            title : 'Irelia',
-            summoner : summoner
-          }
-        );
+        console.log(response.data); // Non http error
+        event.emit('render', req, res, {error : 'Sorry, there was some crazy error.'});
       }
+    }
+    else
+    {
+      // More stuff here
+      summoner = response.data;
+      summoner.region = summonerRegion;
+
+      var stuff = ['summary', 'ranked'];
+      var finished = 0;
+
+      stuff.forEach(function(func){
+        get[func](summoner, function(response){
+          if(response.status == 'error')
+          {
+            summoner[func] = 'error';
+            console.log("Error:", response.data.message);
+          }
+          else
+          {
+            summoner[func] = response.data;
+          }
+
+          finished++;
+
+          if(finished === stuff.length)
+          {
+            console.log(summoner);
+            // Render All the info into a view!
+            event.emit('render', req, res, {
+              summoner : summoner,
+              profileIcon : 'images/lolstatic/5.18.1/img/profileicon/' + summoner.profileIconId + '.png'
+            });
+          }
+        });
+      });
+    }
   });
-  
-  
 });
 
 

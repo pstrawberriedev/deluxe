@@ -9,7 +9,7 @@ router.get('/', function(req, res) {
     console.log(comments)
     res.render(
       'form',
-      {title : 'Comment Form', comments : comments}
+      {title : 'Say Hi', comments : comments}
     );
   });
 });

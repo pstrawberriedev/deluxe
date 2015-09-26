@@ -10,6 +10,7 @@
     "cookie-parser": "~1.3.5",
     "debug": "~2.2.0",
     "express": "~4.13.1",
+    "extend": "^3.0.0",
     "hbs": "^3.1.1",
     "hbs-utils": "0.0.3",
     "irelia": "^0.2.5",

@@ -14,4 +14,3 @@ $('body').flowtype({
    maxFont   : 20,
    fontRatio : 30
 });
-
