@@ -1,3 +1,11 @@
+Array.prototype.getIndexBy = function (name, value) {
+    for (var i = 0; i < this.length; i++) {
+        if (this[i][name] == value) {
+            return i;
+        }
+    }
+}
+
 // The good stuff
 var express = require('express');
 var router = express.Router();
@@ -88,8 +96,10 @@ router.post('/', function(req, res, next) {
           if(finished === stuff.length)
           {
             //console.log(summoner);
-            var crawlMe = summoner.league[0]['entries'][0];
+            var crawlMe = summoner.league[0]['entries'];
             var rankedId = summoner.league[0].participantId;
+            var leagueSingle = crawlMe[crawlMe.getIndexBy("playerOrTeamId", rankedId)];
+            
             
             summoner.league[0]['entries'].forEach(function(entry) {
               console.log(entry);
@@ -100,11 +110,8 @@ router.post('/', function(req, res, next) {
             event.emit('render', req, res, {
               summoner : summoner,
               profileIcon : 'images/lolstatic/5.18.1/img/profileicon/' + summoner.profileIconId + '.png',
-              leagueName : summoner.league[0].name,
-              //leagueTier : summoner.league[0].tier,
-              //leagueDivision : summoner.league[0]['entries'][0].division,
-              test : JSON.stringify(summoner.league),
-              myId : rankedId
+              leagueInfo : summoner.league[0],
+              leagueSingle : leagueSingle,
             });
           }
         });

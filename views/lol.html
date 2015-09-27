@@ -8,7 +8,7 @@
       </div>
     </section>
     
-    <section class="row">
+    <section class="row form">
       <div class="col-lg-4 col-lg-push-4 col-md-6 col-md-push-3 col-sm-8 col-sm-push-2 col-xs-10 col-xs-push-1">
         <form method="post" action="/lol">
           <section class="region">
@@ -23,22 +23,15 @@
     
     {{#if summoner}}
       <section class="row results">
-        <div class="col-sm-6">
+        <div class="col-sm-12">
           <img class="profileIcon" src ="{{profileIcon}}" />
           <ul class="basic">
             <li class="name">{{summoner.name}}&nbsp;&nbsp;<img class="rankedIcon" src="{{rankedIcon}}" /></li>
             <li class="level">Level {{summoner.summonerLevel}}</li>
-            <br />
-            {{leagueTier}}&nbsp;{{leagueDivision}}
-            <br />
-            {{leagueName}}
-            <br />
-            myid:{{myId}}<br />
-            {{test}}
+            <li class="tier">
+              {{leagueInfo.tier}}&nbsp;{{leagueSingle.division}}
+            </li>
           </ul>
-        </div>
-        <div class="col-sm-6">
-          <img src ="" />
         </div>
       </section>
     {{/if}}
