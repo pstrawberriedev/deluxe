@@ -3,28 +3,59 @@
   Namespace: #pageLeague
 */
 #pageLeague {
-  
-  .results {
-    text-align:left;
-    .profileIcon {
-      position:relative;
-      display:inline-block;
-      margin-right:10px;
-    }
-    .basic {
-      position:relative;
-      display:inline-block;
-      text-align:left;
-      vertical-align: top;
-      li {
-        display:block;
-        font-size:1.4em;
-      }
-      .rankedIcon {
-        display:inline;
-      }
+  .ranked, .basic {
+    margin-bottom:15px;
+    border-bottom:1px solid #fff;
+  }
+  .basic {
+    height:100%;
+    border-left:1px dotted #cfcfcf;
+    border-right:1px dotted #cfcfcf;
+    @media (max-width:767px) {
+      padding-top:10px;
+      padding-bottom:10px;
+      border:0;
+      border-top:1px dotted #cfcfcf;
+      border-bottom:1px dotted #cfcfcf;
     }
   }
-  
+  h3 {
+    display:block;
+    text-align:center;
+    padding-bottom:4px;
+    padding-top:12px;
+    margin-bottom:12px;
+    //border-bottom:1px dotted #ccc;
+  }
+  .profileIcon {
+    max-width:64px;
+    height:auto;
+    float:left;
+    margin-right:5px;
+  }
+  .level {
+    display:block;
+    vertical-align:top;
+  }
+  .levelTier {
+    text-align:left;
+  }
+  .tier {
+    display:block;
+    text-align:left;
+    position:relative;
+    img {
+      float:left;
+      max-width:32px;
+      height:auto;
+      margin-right:5px;
+    }
+    p {
+      margin-top:4px;
+      float:left;
+      font-size:1em;
+    }
+    
+  }
   
 }

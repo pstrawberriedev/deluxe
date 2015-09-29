@@ -1,0 +1,57 @@
+{{> header}}
+
+  <section class="container-fluid" id="pageLeague">
+ 
+    {{#if summoner}}
+    <section class="row">
+      <div class="col-sm-12">
+        <h1><span>{{summoner.name}}</span></h1>
+      </div>
+    </section>
+    
+    <!-- Display Results -->
+    
+      <section class="row return">
+        <!-- Ranked Stats -->
+        <div class="col-sm-4 ranked">
+          <h3>Ranked</h3>
+        </div>
+        
+        <!--  Basic Info -->
+        <div class="col-sm-4 basic clearfix">
+          <img class="profileIcon" src ="{{profileIcon}}" />
+          <div class="level">
+            Level {{summoner.summonerLevel}}
+          </div>
+          {{#if summoner.league}}
+          <div class="tier">
+            <img src="{{tierIcon}}" />
+            <p>
+              <!--{{leagueInfo.tier}}&nbsp;-->{{leagueSingle.division}}
+            </p>
+          </div>
+          {{/if}}
+        </div>
+        
+        <!-- Recent Stats -->
+        <div class="col-sm-4 recent">
+          <h3>Recent</h3>
+          
+        </div>
+        
+      </section>
+    {{/if}}
+    
+    <!-- Display Error -->
+    {{#if error}}
+    <section class="row">
+      <div class="col-sm-12">
+        <pre><span>{{error}}</span></pre>
+      </div>
+    </section>
+    {{/if}}
+    
+
+  </section>
+
+{{> footer}}

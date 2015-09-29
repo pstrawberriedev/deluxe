@@ -1,3 +1,4 @@
+// Define the Function to getIndexBy inside of unknown object arrays
 Array.prototype.getIndexBy = function (name, value) {
     for (var i = 0; i < this.length; i++) {
         if (this[i][name] == value) {
@@ -100,6 +101,12 @@ router.post('/', function(req, res, next) {
             var rankedId = summoner.league[0].participantId;
             var leagueSingle = crawlMe[crawlMe.getIndexBy("playerOrTeamId", rankedId)];
             
+            //
+            var tierFirst = summoner.league[0].tier;
+            var tierSecond = tierFirst.toLowerCase();
+            var tierSecondHalf = leagueSingle.division;
+            var tierThird = tierSecondHalf.toLowerCase();
+            var tierIcon = 'images/lolstatic/external/tier_icons/' + tierSecond + '_' + tierThird + '.png';
             
             summoner.league[0]['entries'].forEach(function(entry) {
               console.log(entry);
@@ -108,8 +115,10 @@ router.post('/', function(req, res, next) {
             
             // Render All the info into a view!
             event.emit('render', req, res, {
+              view: 'lolreturn',
               summoner : summoner,
               profileIcon : 'images/lolstatic/5.18.1/img/profileicon/' + summoner.profileIconId + '.png',
+              tierIcon : tierIcon,
               leagueInfo : summoner.league[0],
               leagueSingle : leagueSingle,
             });

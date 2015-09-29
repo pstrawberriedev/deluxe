@@ -9,7 +9,7 @@
     </section>
     
     <section class="row form">
-      <div class="col-lg-4 col-lg-push-4 col-md-6 col-md-push-3 col-sm-8 col-sm-push-2 col-xs-10 col-xs-push-1">
+      <div class="col-lg-4 col-lg-push-4 col-md-6 col-md-push-3 col-sm-8 col-sm-push-2 col-xs-12">
         <form method="post" action="/lol">
           <section class="region">
             <input type="radio" name="region" value="na" checked="checked" />NA<br />
@@ -21,21 +21,28 @@
     </section>
     <br /><br />
     
+    <!-- Display Results -->
     {{#if summoner}}
       <section class="row results">
         <div class="col-sm-12">
           <img class="profileIcon" src ="{{profileIcon}}" />
           <ul class="basic">
-            <li class="name">{{summoner.name}}&nbsp;&nbsp;<img class="rankedIcon" src="{{rankedIcon}}" /></li>
+            <!-- Summoner Basics -->
+            <li class="name">{{summoner.name}}</li>
             <li class="level">Level {{summoner.summonerLevel}}</li>
-            <li class="tier">
-              {{leagueInfo.tier}}&nbsp;{{leagueSingle.division}}
-            </li>
+            
+            {{#if summoner.league}}
+              <li class="tier">
+                <img class="icon64" src="{{tierIcon}}" />
+                {{leagueInfo.tier}}&nbsp;{{leagueSingle.division}}
+              </li>
+            {{/if}}
           </ul>
         </div>
       </section>
     {{/if}}
     
+    <!-- Display Error -->
     {{#if error}}
     <section class="row results"> 
       <h4>{{error}}</h4>
