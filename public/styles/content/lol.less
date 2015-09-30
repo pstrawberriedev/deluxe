@@ -3,38 +3,47 @@
   Namespace: #pageLeague
 */
 #pageLeague {
-  .ranked, .basic {
-    margin-bottom:15px;
-    border-bottom:1px solid #fff;
-  }
-  .basic {
-    height:100%;
-    border-left:1px dotted #cfcfcf;
-    border-right:1px dotted #cfcfcf;
-    @media (max-width:767px) {
-      padding-top:10px;
-      padding-bottom:10px;
-      border:0;
-      border-top:1px dotted #cfcfcf;
-      border-bottom:1px dotted #cfcfcf;
-    }
+  // Global
+  // ----
+  h1 {
+    //override
+    margin-bottom:.55em;
   }
   h3 {
     display:block;
+    padding:6px;
+    margin-bottom:5px;
+    font-size:1em;
+    background-color:rgba(0,0,0,.1);
+    margin:0 -15px 15px -15px;
+    font-weight:400;
+    @media (max-width:767px) {
+      font-size:1.55em;
+    }
+  }
+  
+  // Basic
+  // ----
+  .basic {
+    height:100%;
+    padding-bottom:15px;
     text-align:center;
-    padding-bottom:4px;
-    padding-top:12px;
-    margin-bottom:12px;
-    //border-bottom:1px dotted #ccc;
+    @media (max-width:767px) {
+      width:100%;
+      padding-top:10px;
+      padding-bottom:10px;
+      border:0;
+      margin-bottom:15px;
+    }
   }
   .profileIcon {
     max-width:64px;
     height:auto;
-    float:left;
-    margin-right:5px;
+    margin-right:10px;
+    display:inline-block;
   }
   .level {
-    display:block;
+    display:inline-block;
     vertical-align:top;
   }
   .levelTier {
@@ -55,7 +64,45 @@
       float:left;
       font-size:1em;
     }
-    
+  }
+  // Ranked
+  // ----
+  .ranked {
+    text-align:center;
+    padding-bottom:15px;
+    background-color:rgba(0,0,0,.03);
+    margin-top:30px;
+    @media (max-width:767px) {
+      margin-top:0;
+      margin-bottom:15px;
+    }
+    p  {
+      position:relative;
+      display:block;
+    }
+    .rankedWL {
+      .w,.l {
+        padding:6px;
+        float:left;
+        width:50%;
+      }
+      .w {
+        background-color:rgba(0,255,0,.23);
+      }
+      .l {background-color:rgba(255,0,0,.23);}
+    }
   }
   
+  // Recent
+  // ----
+  .recent {
+    text-align:center;
+    padding-bottom:15px;
+    background-color:rgba(0,0,0,.03);
+    margin-top:30px;
+    @media (max-width:767px) {
+      margin-top:0;
+      margin-bottom:15px;
+    }
+  }
 }

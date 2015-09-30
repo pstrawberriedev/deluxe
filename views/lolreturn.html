@@ -12,31 +12,41 @@
     <!-- Display Results -->
     
       <section class="row return">
-        <!-- Ranked Stats -->
-        <div class="col-sm-4 ranked">
-          <h3>Ranked</h3>
-        </div>
         
         <!--  Basic Info -->
-        <div class="col-sm-4 basic clearfix">
-          <img class="profileIcon" src ="{{profileIcon}}" />
-          <div class="level">
-            Level {{summoner.summonerLevel}}
-          </div>
-          {{#if summoner.league}}
-          <div class="tier">
-            <img src="{{tierIcon}}" />
-            <p>
-              <!--{{leagueInfo.tier}}&nbsp;-->{{leagueSingle.division}}
-            </p>
-          </div>
-          {{/if}}
+        <div class="col-sm-4 col-sm-push-4 basic">
+            <img class="profileIcon" src ="{{profileIcon}}" />
+            <div class="level">
+              Level {{summoner.summonerLevel}}
+              {{#if summoner.league}}
+              <br />
+              <div class="tier">
+                <img src="{{tierIcon}}" />
+                <p>
+                  <!--{{leagueInfo.tier}}&nbsp;-->{{leagueSingle.division}}
+                </p>
+              </div>
+              {{/if}}
+            </div>
+        </div>
+        
+        <!-- Ranked Stats -->
+        <div class="col-sm-4 col-sm-pull-4 ranked">
+          <h3>Ranked</h3>
+          <p class="rankedWL clearfix">
+            <span class="w">
+              {{leagueSingle.wins}}
+            </span>
+            <span class="l">
+              {{leagueSingle.losses}}
+            </span>
+          </p>
         </div>
         
         <!-- Recent Stats -->
         <div class="col-sm-4 recent">
           <h3>Recent</h3>
-          
+          <p>cool things!</p>
         </div>
         
       </section>
