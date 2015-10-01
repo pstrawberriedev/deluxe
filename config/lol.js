@@ -68,9 +68,27 @@ function getRanked(summoner, callback)
   });
 }
 
+// Grab Summoner Recent Games
+function getRecentGames(summoner, callback)
+{
+  // Summary info
+  irelia.getRecentGamesBySummonerId(summoner.region, summoner.id, function (err, summonerRecentGames) {
+    if(err) {
+      // Play catch
+      callback({status: 'error', data: err});
+      console.log(err);
+    } else {
+      // Play catch
+      //console.log(summonerRecentGames.games);
+      callback({status: 'success', data: summonerRecentGames});
+    }
+  });
+}
+
 module.exports = {
   summoner: getSummoner,
   summary: getSummary,
   ranked: getRanked,
-  league: getSummonerLeague
+  league: getSummonerLeague,
+  recentGames: getRecentGames
 };

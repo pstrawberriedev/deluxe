@@ -46,7 +46,13 @@
         <!-- Recent Stats -->
         <div class="col-sm-4 recent">
           <h3>Recent</h3>
-          <p>cool things!</p>
+          <div class="gamesWrap clearfix">
+            {{#recentGames}}
+              <div class="singleGame {{stats.win}}">
+                <img src="" />{{gameType}}
+            </div>
+            {{/recentGames}}
+          </div>
         </div>
         
       </section>

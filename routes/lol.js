@@ -10,10 +10,14 @@ Array.prototype.getIndexBy = function (name, value) {
 // The good stuff
 var express = require('express');
 var router = express.Router();
+var fs = require('fs');
 var get = require('../config/lol');
 var events = require('events');
 var event = new events.EventEmitter();
 var extend = require('extend');
+
+// Grab some JSON info
+var championJson = JSON.parse(fs.readFileSync('./config/data/champion.json', 'utf8'));
 
 event.on('render', function(req, res, options)
 {
@@ -77,7 +81,7 @@ router.post('/', function(req, res, next) {
       summoner = response.data;
       summoner.region = summonerRegion;
 
-      var stuff = ['summary', 'ranked', 'league'];
+      var stuff = ['summary', 'recentGames', 'league', 'ranked'];
       var finished = 0;
 
       stuff.forEach(function(func){
@@ -96,22 +100,24 @@ router.post('/', function(req, res, next) {
 
           if(finished === stuff.length)
           {
-            //console.log(summoner);
             var crawlMe = summoner.league[0]['entries'];
             var rankedId = summoner.league[0].participantId;
             var leagueSingle = crawlMe[crawlMe.getIndexBy("playerOrTeamId", rankedId)];
             
-            //
+            //recent games
+            var recentGamesList = summoner.recentGames['games'];
+            //var recentGamesList = recentCrawl[recentCrawl.getIndexBy("subType", "RANKED_SOLO_5x5")];
+            
             var tierFirst = summoner.league[0].tier;
             var tierSecond = tierFirst.toLowerCase();
             var tierSecondHalf = leagueSingle.division;
             var tierThird = tierSecondHalf.toLowerCase();
             var tierIcon = 'images/lolstatic/external/tier_icons/' + tierSecond + '_' + tierThird + '.png';
             
-            summoner.league[0]['entries'].forEach(function(entry) {
-              console.log(entry);
-            });
-
+            //JSON
+            var champData = championJson.data;
+            
+            console.log(champData['Aatrox']);
             
             // Render All the info into a view!
             event.emit('render', req, res, {
@@ -121,6 +127,7 @@ router.post('/', function(req, res, next) {
               tierIcon : tierIcon,
               leagueInfo : summoner.league[0],
               leagueSingle : leagueSingle,
+              recentGames : recentGamesList
             });
           }
         });
