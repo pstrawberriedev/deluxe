@@ -17,7 +17,7 @@ var event = new events.EventEmitter();
 var extend = require('extend');
 
 // Grab some JSON info
-var championJson = JSON.parse(fs.readFileSync('./config/data/champion.json', 'utf8'));
+var championJson = JSON.parse(fs.readFileSync('./data/champion.json', 'utf8'));
 
 event.on('render', function(req, res, options)
 {
@@ -97,29 +97,41 @@ router.post('/', function(req, res, next) {
           }
 
           finished++;
-
+          
+          //
+          // Return all the Data here!
+          //---+
           if(finished === stuff.length)
           {
             var crawlMe = summoner.league[0]['entries'];
+            //summoner's current ranked info
             var rankedId = summoner.league[0].participantId;
+            //summoner's current league info
             var leagueSingle = crawlMe[crawlMe.getIndexBy("playerOrTeamId", rankedId)];
-            
             //recent games
             var recentGamesList = summoner.recentGames['games'];
-            //var recentGamesList = recentCrawl[recentCrawl.getIndexBy("subType", "RANKED_SOLO_5x5")];
-            
+            // champ json
+            var champData = championJson.data;
+
+            // 
+            // Champion's Tier Icon
             var tierFirst = summoner.league[0].tier;
             var tierSecond = tierFirst.toLowerCase();
             var tierSecondHalf = leagueSingle.division;
             var tierThird = tierSecondHalf.toLowerCase();
             var tierIcon = 'images/lolstatic/external/tier_icons/' + tierSecond + '_' + tierThird + '.png';
             
-            //JSON
-            var champData = championJson.data;
+            //
+            // Champion's Recent Game Hero Icon
             
-            console.log(champData['Aatrox']);
+            //
+            // CONSLE LOG SHIT HERE
+            //var champData = champData[champData.getIndexBy("key", rankedId)];
+            console.log(recentGamesList);
             
+            // --
             // Render All the info into a view!
+            // --
             event.emit('render', req, res, {
               view: 'lolreturn',
               summoner : summoner,
@@ -129,7 +141,8 @@ router.post('/', function(req, res, next) {
               leagueSingle : leagueSingle,
               recentGames : recentGamesList
             });
-          }
+          }//---+
+          
         });
       });
     }

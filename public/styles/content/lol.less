@@ -5,38 +5,51 @@
 #pageLeague {
   // Global
   // ----
+  padding-top:90px;
+  
   h1 {
     //override
+    font-size:3em;
     margin-bottom:.55em;
   }
   h3 {
     display:block;
     padding:6px;
-    margin-bottom:5px;
-    font-size:1em;
-    background-color:rgba(0,0,0,.1);
-    margin:0 -15px 15px -15px;
-    font-weight:400;
+    font-size:2.2em;
+    margin:0 -15px 10px -15px;
     @media (max-width:767px) {
       font-size:1.55em;
     }
   }
-  .gamesWrap {
-    position:relative;
-    width:100%;
-  }
   .singleGame {
-    float:left;
-    width:50%;
-    padding:10px;
+    padding-top:15px;
+    padding-bottom:15px;
     font-size:1em;
-    @media (max-width:767px) {width:100%;}
+    text-align:center;
     &.true {background-color:rgba(0,255,0,.23);}
     &.false {background-color:rgba(255,0,0,.23);}
     img {
-      display:inline-block;
-      width:64px;
-      height:64px;
+      max-width:100%;
+      height:auto;
+      @media (max-width:767px) {
+        height:60px;
+        width:60px;
+        margin-right:10px;
+        display:inline-block;
+      }
+    }
+    p {
+      display:block;
+      margin-top:10px;
+      @media (max-width:767px) {
+        display:inline-block;
+        margin-top:0;
+        vertical-align:top;
+      }
+    }
+    @media(max-width:767px) {
+      text-align:left;
+      border-bottom:1px solid #f0f0f0;
     }
   }
   
@@ -87,8 +100,7 @@
   // ----
   .ranked {
     text-align:center;
-    padding-bottom:15px;
-    background-color:rgba(0,0,0,.03);
+    //background-color:rgba(0,0,0,.03);
     margin-top:30px;
     @media (max-width:767px) {
       margin-top:0;
@@ -114,9 +126,8 @@
   // Recent
   // ----
   .recent {
-    text-align:center;
-    padding-bottom:15px;
-    background-color:rgba(0,0,0,.03);
+    text-align:center;  
+    //background-color:rgba(0,0,0,.03);
     margin-top:30px;
     @media (max-width:767px) {
       margin-top:0;

@@ -3,18 +3,14 @@
   <section class="container-fluid" id="pageLeague">
  
     {{#if summoner}}
-    <section class="row">
-      <div class="col-sm-12">
-        <h1><span>{{summoner.name}}</span></h1>
-      </div>
-    </section>
     
     <!-- Display Results -->
     
       <section class="row return">
         
         <!--  Basic Info -->
-        <div class="col-sm-4 col-sm-push-4 basic">
+        <div class="col-sm-12 basic">
+            <h1><span>{{summoner.name}}</span></h1>
             <img class="profileIcon" src ="{{profileIcon}}" />
             <div class="level">
               Level {{summoner.summonerLevel}}
@@ -23,7 +19,7 @@
               <div class="tier">
                 <img src="{{tierIcon}}" />
                 <p>
-                  <!--{{leagueInfo.tier}}&nbsp;-->{{leagueSingle.division}}
+                  {{leagueSingle.division}}
                 </p>
               </div>
               {{/if}}
@@ -31,7 +27,8 @@
         </div>
         
         <!-- Ranked Stats -->
-        <div class="col-sm-4 col-sm-pull-4 ranked">
+        {{#if leagueSingle.has}}
+        <div class="rowranked">
           <h3>Ranked</h3>
           <p class="rankedWL clearfix">
             <span class="w">
@@ -42,16 +39,21 @@
             </span>
           </p>
         </div>
+        {{/if}}
         
         <!-- Recent Stats -->
-        <div class="col-sm-4 recent">
+        <div class="col-sm-12 recent">
           <h3>Recent</h3>
-          <div class="gamesWrap clearfix">
+          <div class="row gamesWrap">
             {{#recentGames}}
-              <div class="singleGame {{stats.win}}">
-                <img src="" />{{gameType}}
+              <div class="col-md-4 col-sm-6 singleGame {{stats.win}}" data-toggle="tooltip" data-placement="top" title="{{gameType}}">
+                <img src="images/lolstatic/5.18.1/img/champion/{{championId}}.png" />
+                <p>
+                  {{#if stats.championsKilled}}{{stats.championsKilled}}{{else}}0{{/if}}/{{stats.numDeaths}}<br />
+                  {{#if stats.minionsKilled}}{{stats.minionsKilled}}{{else}}0{{/if}} CS
+                </p>
             </div>
-            {{/recentGames}}
+            {{/recentGames}}  
           </div>
         </div>
         

@@ -5,6 +5,12 @@ $(document).ready(function() {
   console.log('--> deluxe.js');
 });
 
+// Bootstrap Tooltip init
+// Requires Bootstrap.min.js
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
 // Flowtype Init
 // http://simplefocus.com/flowtype/
 $('body').flowtype({
